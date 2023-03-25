@@ -53,7 +53,7 @@ public class Main extends JavaPlugin implements Listener {
 
   @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
   public void onPlayerPartyChange(final PlayerPartyChangeEvent event) {
-    if (!Config.get().getEnabled()) return;
+    if (!Config.get().getEnabled() || event.getNewParty() == null) return;
 
     Player player = event.getPlayer().getBukkit();
     Skin skin =
@@ -63,6 +63,8 @@ public class Main extends JavaPlugin implements Listener {
     player.setSkin(skin);
     NMSHacks.forceSkinChange(player);
 
+    // Refresh players skin on tab list
+    if (matchTabManager == null) return;
     TabEntry playerEntry = matchTabManager.getPlayerEntry(player);
     if (playerEntry instanceof PlayerTabEntry) {
       ((PlayerTabEntry) playerEntry).refresh();
