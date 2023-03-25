@@ -1,0 +1,5 @@
+name: Sea-of-Steves
+main: tc.oc.seaofsteves.Main
+version: ${project.version} (git-${git.commit.id.abbrev})
+depend: [PGM]
+author: Pugzy
